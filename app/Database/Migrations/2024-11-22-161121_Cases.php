@@ -31,19 +31,14 @@ class Cases extends Migration
                 'constraint' => ['Complete', 'Incomplete'],
                 'default' => 'Incomplete',
             ],
-            'admin_id' => [
-                'type' => 'INT',
-                'constraint' => 11,
-                'unsigned' => true,
-            ],
         ]);
         $this->forge->addKey('id', true);
-        $this->forge->addForeignKey('admin_id', 'users', 'id', 'CASCADE', 'CASCADE');
         $this->forge->createTable('cases');
     }
-
+    
     public function down()
     {
         $this->forge->dropTable('cases');
     }
+    
 }

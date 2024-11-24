@@ -34,7 +34,6 @@
             <a href="<?= base_url('dashboard') ?>" class="btn btn-secondary">Back to Dashboard</a>
         </form>
 
-        <!-- Error Toast -->
         <div aria-live="polite" aria-atomic="true" style="position: relative;">
             <div class="toast" id="errorToast" style="position: absolute; top: 20px; right: 20px; display: none;">
                 <div class="toast-header">
@@ -53,7 +52,6 @@
             $('#createCaseForm').on('submit', function (e) {
                 e.preventDefault();
 
-                // Validation
                 const caseType = $('input[name="case_type"]').val();
                 const description = $('textarea[name="description"]').val();
                 const casePriority = $('select[name="case_priority"]').val();
@@ -64,9 +62,8 @@
                     return;
                 }
 
-                // Submit Form via AJAX
                 $.ajax({
-                    url: '<?= base_url('/cases/create') ?>', // Ensure correct URL
+                    url: '<?= base_url('/cases/create') ?>',
                     type: 'POST',
                     data: $(this).serialize(),
                     success: function (response) {

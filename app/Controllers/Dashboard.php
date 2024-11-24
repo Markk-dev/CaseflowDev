@@ -3,14 +3,14 @@
 namespace App\Controllers;
 
 use App\Models\CaseModel;
-
+use App\Models\UserModel;
 class Dashboard extends BaseController
 {
     public function index()
     {
         $caseModel = new CaseModel();
        
-        // Correct the ordering of case priorities
+        
         $cases = $caseModel->orderBy('FIELD(case_priority, "High", "Medium", "Low")')->findAll();
         
         $data = [
@@ -31,26 +31,31 @@ class Dashboard extends BaseController
     public function createCase()
     {
         $caseModel = new CaseModel();
+        $userId = session()->get('user_id');
     
-        $data = [
-            'case_type'    => $this->request->getPost('case_type'),
-            'description'  => $this->request->getPost('description'),
-            'case_priority'=> $this->request->getPost('case_priority'),
-            'progress'     => 'Incomplete', 
-            'admin_id'     => session()->get('user_id'), // Use dynamic admin ID based on authenticated user
-        ];
-    
-        // Attempt to save data and handle errors
-        if (!$caseModel->save($data)) {
-            log_message('error', 'Case creation failed: ' . implode(', ', $caseModel->errors())); // Log error
-            return $this->response->setJSON([
-                'success' => false,
-                'error'   => 'Failed to save case. Please review your input.',
-            ]);
+        if (!$userId) {
+            return redirect()->back()->with('error', 'User not logged in.');
         }
     
-        return $this->response->setJSON(['success' => true]);
+        $data = [
+            'case_type'     => $this->request->getPost('case_type'),
+            'description'   => $this->request->getPost('description'),
+            'case_priority' => $this->request->getPost('case_priority'),
+            'progress'      => $this->request->getPost('progress') ?? 0, // Default to 0 if not provided
+            'user_id'       => session()->get('user_id'), // or fetch from session/login
+            'created_by' => session()->get('user_id'), // Set the creator's ID
+            'created_at'    => date('Y-m-d H:i:s'),
+            'updated_at'    => date('Y-m-d H:i:s'),
+        ];
+        
+    
+        if ($caseModel->insert($data)) {
+            return redirect()->to('/dashboard')->with('success', 'Case created successfully.');
+        } else {
+            return redirect()->back()->with('error', 'Failed to create case.');
+        }
     }
+    
     
 
     public function deleteCase($id)
@@ -66,24 +71,53 @@ class Dashboard extends BaseController
     }
 
     public function editCase($id)
-    {
-        $caseModel = new CaseModel();
-
-        if (!$caseModel->find($id)) {
-            return $this->response->setJSON(['success' => false, 'error' => 'Case not found.']);
-        }
-
-        $data = [
-            'case_type' => $this->request->getPost('case_type'),
-            'description' => $this->request->getPost('description'),
-            'case_priority' => $this->request->getPost('case_priority'),
-            'progress' => $this->request->getPost('progress')
-        ];
-
-        if (!$caseModel->update($id, $data)) {
-            return $this->response->setJSON(['success' => false, 'error' => 'Failed to update case.']);
-        }
-
-        return $this->response->setJSON(['success' => true]);
+{
+    $caseModel = new CaseModel();
+    $userModel = new UserModel();
+    
+    $userId = session()->get('user_id');
+    
+    if (!$caseModel->isCreator($id, $userId)) {
+        return redirect()->back()->with('error', 'You do not have permission to edit this case.');
+    }
+    
+    $data = [
+        'case_type'    => $this->request->getPost('case_type'),
+        'description'  => $this->request->getPost('description'),
+        'case_priority' => $this->request->getPost('case_priority'),
+        'progress'     => $this->request->getPost('progress'),
+    ];
+    
+    if ($caseModel->update($id, $data)) {
+        return redirect()->to('/dashboard')->with('success', 'Case updated successfully.');
+    } else {
+        return redirect()->back()->with('error', 'Failed to update the case.');
     }
 }
+
+
+    public function editCasePage($id)
+    {
+        $caseModel = new CaseModel();
+        $userModel = new UserModel();
+        
+        $case = $caseModel->getCaseWithCreator($id);
+        if (!$case) {
+            return redirect()->back()->with('error', 'Case not found.');
+        }
+        
+        $userId = session()->get('user_id');
+        if (!$caseModel->isCreator($id, $userId)) {
+            return redirect()->back()->with('error', 'You do not have permission to edit this case.');
+        }
+    
+        $data = [
+            'case' => $case,
+        ];
+        
+        return view('edit_case', $data);
+    }
+    
+
+}
+

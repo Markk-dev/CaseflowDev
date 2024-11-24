@@ -21,3 +21,9 @@ $routes->post('cases/delete/(:num)', 'Dashboard::deleteCase/$1');
 
 $routes->get('/user/data', 'UserController::getUserData');
 
+
+$routes->get('cases/edit/(:num)', 'ConfigController::edit/$1'); // Display the edit form
+$routes->post('cases/edit/(:num)', 'ConfigController::update/$1'); // Handle form submission
+
+
+

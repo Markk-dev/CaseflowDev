@@ -1,4 +1,4 @@
-// sidepanel.js
+
 const togglePanelBtn = document.getElementById('togglePanelBtn');
 const sidePanel = document.querySelector('.side-panel');
 
