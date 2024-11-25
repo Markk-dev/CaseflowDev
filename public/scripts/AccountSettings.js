@@ -29,8 +29,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const accountSettings = new AccountSettings(userData);
 
     
-    const togglePanelBtn = document.getElementById('togglePanelBtn');
-    togglePanelBtn.addEventListener('click', () => {
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    sidebarToggle.addEventListener('click', () => {
         accountSettings.populateAccountSettings();
     });
 });

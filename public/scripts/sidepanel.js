@@ -1,8 +1,8 @@
 
-const togglePanelBtn = document.getElementById('togglePanelBtn');
+const sidebarToggle = document.getElementById('sidebarToggle');
 const sidePanel = document.querySelector('.side-panel');
 
-togglePanelBtn.addEventListener('click', () => {
+sidebarToggle.addEventListener('click', () => {
     sidePanel.classList.toggle('active');
 });
 

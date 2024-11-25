@@ -6,7 +6,7 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-// Authentication routes
+// Authentication Routes
 $routes->get('/', 'Auth::register');
 $routes->post('register', 'Auth::registerUser');
 $routes->get('login', 'Auth::login');
@@ -21,9 +21,9 @@ $routes->post('cases/delete/(:num)', 'Dashboard::deleteCase/$1');
 
 $routes->get('/user/data', 'UserController::getUserData');
 
-
-$routes->get('cases/edit/(:num)', 'ConfigController::edit/$1'); // Display the edit form
-$routes->post('cases/edit/(:num)', 'ConfigController::update/$1'); // Handle form submission
+//Edit Case Routes
+$routes->get('cases/edit/(:num)', 'ConfigController::edit/$1');
+$routes->post('cases/edit/(:num)', 'ConfigController::update/$1'); 
 
 
 

@@ -1,9 +1,8 @@
-
 .side-panel {
     position: fixed;
     top: 0;
-    right: -250px;
-    width: 250px;
+    right: -270px;
+    width: 270px;
     height: 100%;
     background-color: #333;
     color: white;
@@ -27,6 +26,12 @@
     padding: 12px;
     text-align: center;
     cursor: pointer;
+}
+
+.sidebar-toggle{
+    background-color: none;
+    border: none;
+    color: white;
 }
 
 .side-panel ul li:hover {
@@ -59,13 +64,11 @@
 
 
 #togglePanelBtn {
-    background-color: #333;
+    background-color: none;
     color: white;
     border: none;
     font-size: 20px;
     cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 5px;
 }
 
 #togglePanelBtn:focus {
@@ -73,7 +76,8 @@
 }
 
 #togglePanelBtn:hover {
-    background-color: #444;
+    color: #444;
+    transition: 0.45s ease-in-out;
 }
 
 

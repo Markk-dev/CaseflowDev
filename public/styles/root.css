@@ -1,0 +1,17 @@
+:root {
+    --primaryLight: #fafafa;
+    --primaryDark: #070f13;
+    --header: #ffffff;
+
+    --red: #ee7a7a;
+    --darkRed: #3E1716;
+    --orange: #F24E43;
+
+    --green: #24AE7C;
+    --darkGreen: #0f3224;
+
+    --blue: #79B5EC;
+    --darkBlue: #192c3d;
+
+    --pastelYellow: #f8f7f5;
+}
