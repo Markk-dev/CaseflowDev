@@ -15,13 +15,23 @@ class DataTableComponent {
         if (empty($cases)) {
             return '<tr><td colspan="5" class="text-center">No cases found</td></tr>';
         }
-
+    
         $counter = 1;
         $rows = '';
-
+    
+        // Get the logged-in user's ID from the session
+        $loggedInUserId = session()->get('user_id');
+    
         foreach ($cases as $case) {
             $priorityComponent = $this->getPriorityComponent($case['case_priority']);
-
+    
+            // Check if the logged-in user created the case
+            $isCreator = $loggedInUserId == $case['created_by'];
+    
+            $editButton = $isCreator
+                ? '<a href="' . base_url('cases/edit/' . $case['id']) . '" class="editBtn" style="color: var(--highlightGreen); cursor: pointer;">Edit</a>'
+                : '<span class="editBtn" style="color: slategray; cursor: not-allowed;">Edit</span>';
+    
             $rows .= '
                 <tr>
                     <td>' . esc($counter++) . '</td>
@@ -29,15 +39,15 @@ class DataTableComponent {
                     <td>' . esc($case['description']) . '</td>
                     <td>' . $priorityComponent . '</td>
                     <td>
-                        <a href="' . base_url('cases/edit/' . $case['id']) . '" class="btn btn-sm btn-warning">Edit</a>
-                        <button class="btn btn-sm btn-success" onclick="completeCase(' . esc($case['id']) . ')">Complete</button>
+                        <div class="actionBtns">' . $editButton . '</div>
                     </td>
                 </tr>
             ';
         }
-
+    
         return $rows;
     }
+    
 
     /**
      * Get the priority capsule component based on the priority level.

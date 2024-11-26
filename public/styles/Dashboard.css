@@ -3,7 +3,12 @@ body {
     background-color: var(--pastelYellow);
     box-sizing: border-box;
     font-family: 'Inter', sans-serif;
+    text-decoration: none;
 }
+a:hover {
+    text-decoration: none;
+}
+
 
 .container {
     max-width: 75%;
@@ -94,6 +99,9 @@ body {
     padding: 1.5rem;
 }
 
+
+
+
 .cardBodyHolder{
     display: flex;
     gap: .7rem;
@@ -120,6 +128,7 @@ body {
 }
 
 .HighCapsule{
+    padding: 1rem; 
     display: flex;
     gap: 7px;
     align-items: center;
@@ -131,6 +140,7 @@ body {
 }
 
 .MediumCapsule{
+    padding: 1rem; 
     display: flex;
     gap: 7px;
     align-items: center;
@@ -142,6 +152,7 @@ body {
 }
 
 .LowCapsule{
+    padding: 1rem; 
     display: flex;
     gap: 7px;
     align-items: center;
@@ -152,20 +163,24 @@ body {
     border-radius: 25px;
 }
 
-.search-container {
+.SearchFieldContainer {
     position: relative;
-    max-width: 55%;
+    max-width: 100%;
     margin: 40px 0 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
 }
 
 #searchField {
-    width: 100%;
-    padding: 10px;
+    width: 50%;
+    padding: 20px;
     font-size: 14px;
     color: var(--darkBlue);
     border: 1px solid var(--darkBlue);
     background-color: transparent;
-    border-radius: 25px;
+    border-radius: 5px;
 }
 
 #searchField::placeholder, #searchField:focus{
@@ -188,4 +203,25 @@ body {
 .cardTextGreen{
     color: var(--green);
 }
+
+.Verified:hover:before{
+    transform: rotate(-20deg) translateX(-140px) translateY(-70px);
+}
+
+#filterPriority{
+    width: 120px;
+    height: 40px;
+    padding: 5px;
+    font-size: 14px;
+    background-color: transparent;
+    border: 1px solid var(--darkBlue);
+    border-radius: 5px;
+}
+
+#filterPriority:hover{
+   background-color: rgb(206, 220, 237);
+   color: var(--darkBlue);
+   border: 1px solid transparent;
+}
+
 

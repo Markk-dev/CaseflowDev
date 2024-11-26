@@ -7,7 +7,8 @@ use CodeIgniter\Router\RouteCollection;
  */
 
 // Authentication Routes
-$routes->get('/', 'Auth::register');
+$routes->get('/', 'Auth::login');
+$routes->get('register', 'Auth::register');
 $routes->post('register', 'Auth::registerUser');
 $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::loginUser');
@@ -19,7 +20,8 @@ $routes->post('cases/create', 'Dashboard::createCase');    // Form submission
 $routes->post('cases/edit/(:num)', 'Dashboard::editCase/$1');
 $routes->post('cases/delete/(:num)', 'Dashboard::deleteCase/$1');
 
-$routes->get('/user/data', 'UserController::getUserData');
+
+$routes->get('user/getUserData', 'UserController::getUserData');
 
 //Edit Case Routes
 $routes->get('cases/edit/(:num)', 'ConfigController::edit/$1');

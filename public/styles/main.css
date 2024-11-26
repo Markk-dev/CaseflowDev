@@ -12,6 +12,8 @@
     overflow-y: auto;
 }
 
+
+
 .side-panel.active {
     right: 0;
 }
@@ -92,4 +94,8 @@
     font-size: 14px;
     margin: 10px;
     color: #ccc;
+}
+
+.table{
+    margin-top: 1rem;
 }

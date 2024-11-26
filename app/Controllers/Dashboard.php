@@ -7,22 +7,24 @@ use App\Models\UserModel;
 class Dashboard extends BaseController
 {
     public function index()
-    {
-        $caseModel = new CaseModel();
-       
-        
-        $cases = $caseModel->orderBy('FIELD(case_priority, "High", "Medium", "Low")')->findAll();
-        
-        $data = [
-            'cases' => $cases,  
-            'totalCases' => count($cases),  
-            'highPriorityCases' => $caseModel->where('case_priority', 'High')->countAllResults(), 
-            'completedCases' => $caseModel->where('progress', 'Completed')->countAllResults(),
-        ];
+{
+    $caseModel = new CaseModel();
+    
+    // Fetch all cases ordered by priority
+    $cases = $caseModel->orderBy('FIELD(case_priority, "High", "Medium", "Low")')->findAll();
+    
+    // Get the logged-in user's ID
+    $userId = session()->get('user_id');
+    
+    $data = [
+        'cases' => $cases,
+        'totalCases' => count($cases),
+        'highPriorityCases' => $caseModel->where('case_priority', 'High')->countAllResults(),
+        'completedCases' => $caseModel->where('progress', 'Completed')->countAllResults(),
+    ];
 
-        return view('dashboard', $data);
-    }
-
+    return view('dashboard', $data);
+}
     public function createCasePage()
     {
         return view('create_case'); 

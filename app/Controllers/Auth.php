@@ -19,7 +19,7 @@
           ]);
   
           if (!$this->validate($validation->getRules())) {
-              return redirect()->to('/')->withInput()->with('errors', $this->validator->getErrors());
+              return redirect()->to('register')->withInput()->with('errors', $this->validator->getErrors());
           }
   
           $userModel = new UserModel();
@@ -38,15 +38,21 @@
       }
   
       public function loginUser() {
-          $userModel = new UserModel();
-          $user = $userModel->where('email', $this->request->getPost('email'))->first();
-  
-          if ($user && password_verify($this->request->getPost('password'), $user['password'])) {
-              session()->set('user_id', $user['id']);
-              session()->set('role', $user['role']);
-              return redirect()->to('dashboard');
-          }
-  
-          return redirect()->to('login')->with('error', 'Invalid login credentials');
-      }
+        $userModel = new UserModel();
+        $user = $userModel->where('email', $this->request->getPost('email'))->first();
+    
+        if ($user && password_verify($this->request->getPost('password'), $user['password'])) {
+            
+            session()->set([
+                'user_id' => $user['id'],
+                'role'    => $user['role'],
+                'fname'   => $user['fname'], 
+            ]);
+            return redirect()->to('dashboard'); 
+        }
+    
+        
+        return redirect()->to('login')->with('error', 'Invalid login credentials');
+    }
+    
   }
