@@ -27,10 +27,10 @@ $dataTableComponent = new DataTableComponent();
             <p>Lorem</p>
             <p>Lorem</p>
             <p>Lorem</p>
-            <button class="sidebar-toggle" id="sidebarToggle" style="position: fixed; top: 20px; right: 20px;">☰</button>
         </div>
+        <button class="sidebar-toggle" id="sidebarToggle">☰</button>
     </div>
-
+    
     <div class="container">
         <div class="d-flex justify-content-between align-items-center mt-5">
             <h1>
@@ -41,10 +41,11 @@ $dataTableComponent = new DataTableComponent();
             </h1>
 
             <div class="addbtn">
-                <span class="material-symbols-outlined" style="font-size: 2.5rem;color: var(--blue);">add</span>
-                <a href="<?= base_url('cases/create') ?>" class="addCaseBtn">Add Case</a>
+                <a href="<?= base_url('cases/create') ?>" class="addCaseBtn">
+                <span class="material-symbols-outlined" style="font-size: 1.3rem;color: var(--darkGreen); margin: 5px;">add_circle</span>Add Case</a>
             </div>  
 
+    </span>
         </div>
         <p class="subHeader">It’s a pleasure to have you back on the team.</p>
 

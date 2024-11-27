@@ -12,8 +12,6 @@
     overflow-y: auto;
 }
 
-
-
 .side-panel.active {
     right: 0;
 }
@@ -34,6 +32,8 @@
     background-color: none;
     border: none;
     color: white;
+    display: flex;
+    right: 0;
 }
 
 .side-panel ul li:hover {
@@ -64,7 +64,6 @@
     color: #ccc;
 }
 
-
 #togglePanelBtn {
     background-color: none;
     color: white;
@@ -81,7 +80,6 @@
     color: #444;
     transition: 0.45s ease-in-out;
 }
-
 
 .side-panel h5 {
     margin: 0 0 15px;

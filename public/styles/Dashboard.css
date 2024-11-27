@@ -12,7 +12,7 @@ a:hover {
 
 .container {
     max-width: 75%;
-    padding: 4rem 5rem;
+    padding: 1rem 5rem;
 }
 
 .logo{
@@ -24,7 +24,7 @@ a:hover {
 
 .navbar{
     background-color: var(--header);
-    position: absolute;
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -42,10 +42,9 @@ a:hover {
 .navHeader {
     display: flex;
     position: relative;
-    gap: 2rem;
-    margin-right: 6rem;
+    gap: 2.5rem;
     top: 5px;
-    right: 100px;
+    left: 400px;
     justify-content: space-between;
     align-items: center;
 }
@@ -54,6 +53,8 @@ a:hover {
     background-color: transparent;
     display: block;
     color: black;
+    position: relative;
+    margin: 0 0px 5px 90px;   
     border: transparent;
     font-size: 20px;
     cursor: pointer;
@@ -99,16 +100,21 @@ a:hover {
     padding: 1.5rem;
 }
 
-
-
-
 .cardBodyHolder{
     display: flex;
     gap: .7rem;
 }
 
 .addCaseBtn{
-    color: var(--blue);
+    color: var(--darkGreen);
+    display: flex;
+    font-size: 14px;
+    font-weight: 500;
+    align-items: center;
+    justify-content: center;
+}
+.addCaseBtn:Hover{
+    color: var(--darkGreen)
 }
 
 .highPriority{
@@ -224,4 +230,16 @@ a:hover {
    border: 1px solid transparent;
 }
 
-
+.addbtn{
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--green);
+    width: 130px;
+    height: 40px;
+    border-radius: 20px;
+}
+.addbtn:hover{
+    background-color: var(--highlightdarkGreen);
+}

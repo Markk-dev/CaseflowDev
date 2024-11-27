@@ -14,12 +14,13 @@
     --green: #24AE7C;
     --highlightGreen: #3dc56a;
     --darkGreen: #0f3224;
+    --highlightdarkGreen:   #348a68;
 
     --blue: #79B5EC;
     --darkBlue: #192c3d;
     --highlightBlue: #5fa6e9;
    
-}
+}   
 
 
 ::-webkit-scrollbar {
