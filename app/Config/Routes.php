@@ -20,12 +20,14 @@ $routes->post('cases/create', 'Dashboard::createCase');    // Form submission
 $routes->post('cases/edit/(:num)', 'Dashboard::editCase/$1');
 $routes->post('cases/delete/(:num)', 'Dashboard::deleteCase/$1');
 
-
 $routes->get('user/getUserData', 'UserController::getUserData');
 
 //Edit Case Routes
 $routes->get('cases/edit/(:num)', 'ConfigController::edit/$1');
 $routes->post('cases/edit/(:num)', 'ConfigController::update/$1'); 
 
+// Statistics Routes
+$routes->get('statistics', 'StatisticsController::index');
+$routes->get('api/case-data', 'StatisticsController::getCaseData');
 
 

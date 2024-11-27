@@ -4,6 +4,7 @@ namespace App\Controllers;
 
 use App\Models\CaseModel;
 use App\Models\UserModel;
+use App\Libraries\navbar;
 class Dashboard extends BaseController
 {
     public function index()
@@ -21,6 +22,7 @@ class Dashboard extends BaseController
         'totalCases' => count($cases),
         'highPriorityCases' => $caseModel->where('case_priority', 'High')->countAllResults(),
         'completedCases' => $caseModel->where('progress', 'Completed')->countAllResults(),
+        'navbar' => new navbar(),
     ];
 
     return view('dashboard', $data);

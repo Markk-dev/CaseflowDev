@@ -12,27 +12,21 @@ $dataTableComponent = new DataTableComponent();
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?= base_url('styles/main.css') ?>">
     <link rel="stylesheet" href="<?= base_url('styles/Dashboard.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('styles/global.css') ?>">
     <link rel="stylesheet" href="<?= base_url('styles/root.css') ?>">
 
-
     <title>Dashboard</title>
+    
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body class="Mode">
-    <div class="navbar">
-        <p class="logo"><span style="font-weight:290;">Case</span><span style="font-weight:bold;">Flow</span></p> 
-        <div class="navHeader">
-            <p>Lorem</p>
-            <p>Lorem</p>
-            <p>Lorem</p>
-        </div>
-        <button class="sidebar-toggle" id="sidebarToggle">☰</button>
-    </div>
+
+    <?php $navbar->render('dashboard'); ?>
     
     <div class="container">
-        <div class="d-flex justify-content-between align-items-center mt-5">
+        <div class="d-flex justify-content-between align-items-center mt-4">
             <h1>
                 <span style="font-weight: 290;">Welcome,</span> 
                 <span id="userName" style="font-weight: 650;">
@@ -40,18 +34,22 @@ $dataTableComponent = new DataTableComponent();
                 </span> 
             </h1>
 
+            <form class="search-container" action="//llamaswill.tumblr.com/search">
+  <input id="search-box" type="text" class="search-box" name="q" />
+  <label for="search-box"><span class="glyphicon glyphicon-search search-icon"></span></label>
+  <input type="submit" id="search-submit" />
+</form>
+
             <div class="addbtn">
                 <a href="<?= base_url('cases/create') ?>" class="addCaseBtn">
                 <span class="material-symbols-outlined" style="font-size: 1.3rem;color: var(--darkGreen); margin: 5px;">add_circle</span>Add Case</a>
             </div>  
-
-    </span>
         </div>
+        
         <p class="subHeader">It’s a pleasure to have you back on the team.</p>
 
-        <div class="Cases" style="margin-top: 3rem;">
+        <div class="Cases" id="Dashboard" style="margin-top: 3rem;">
             <div class="row my-4">
-
                 <div class="col-md-4">
                     <div class="cardBody1">
                         <div class="cardBodyHolder" style="padding: .5rem;">
@@ -127,6 +125,5 @@ $dataTableComponent = new DataTableComponent();
 
     <script src="<?= base_url('scripts/sidepanel.js') ?>"></script> 
     <script src="<?= base_url('scripts/AccountSettings.js') ?>"></script>
-    <script src="<?= base_url('scripts/backDrop.js') ?>"></script>
 </body>
 </html>

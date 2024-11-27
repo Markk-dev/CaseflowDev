@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--pastelYellow);
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+    scroll-behavior: smooth;
+}
+a:hover {
+    text-decoration: none;
+}
+
+.container {
+    max-width: 75%;
+    padding: 10px 5rem;
+    margin: auto;
+    overflow-x: hidden;
+}
+
+
+.logo{
+    font-size: 1.6rem;
+    font-weight: bold;
+    margin-left: 6rem;
+    padding-top: 10px;
+}
+
+.navbar{
+    background-color: var(--header);
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 0;
+    padding: 5px;
+    z-index: 999;
+    width: 100%;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.1);
+}
+
+.navHeader, .Logo{
+    margin-bottom: 10px;
+}
+
+.navHeader {
+    display: flex;
+    position: relative;
+    gap: 2.5rem;
+    top: 5px;
+    left: 400px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navHeader {
+    display: flex;
+    gap: 2.5rem;
+    justify-content: flex-end;
+    margin-right: 2rem;
+}
+
+
+.sidebar-toggle {
+    background-color: transparent;
+    display: block;
+    position: relative;
+    margin: 0 15px 5px 100px;   
+    border: transparent;
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
+.sidebar-toggle:hover{
+    color: #444;
+}
+
+.container .subHeader, .cardBodyHolder{
+    font-size: 1rem;
+    line-height: 1.5;
+    letter-spacing: .02rem;
+}

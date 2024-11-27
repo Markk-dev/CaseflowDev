@@ -2,7 +2,11 @@
     --primaryLight: #fafafa;
     --primaryDark: #070f13;
 
+    --standardDark: rgb(20, 20, 20);
+    --card-color: rgb(23, 23, 23);
+
     --pastelYellow: #f8f7f5;
+    --hoverpastelYellow: #eeece7;
     --header: #ffffff;
 
     --grey: #708090;
