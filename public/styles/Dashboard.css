@@ -4,6 +4,34 @@
     letter-spacing: .02rem;
 }
 
+.locationVar{
+    word-wrap: break-word; 
+    overflow-wrap: break-word; 
+    max-width: 200px;
+    font-size: .9rem;
+}
+
+.addbtn{
+    display: flex;
+    padding: 1rem;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--lightBlue);
+    width: 130px;
+    height: 40px;
+    border-radius: 5px;
+}
+.addbtn:hover{
+    background-color: var(--highlightBlue);
+}
+
+#addCircle{
+    font-size: 1.4rem;
+    color: var(--darkGreen);
+    margin: 5px; 
+    border-radius: 50%; 
+}
+
 .cardBody1{
     background-color: var(--darkBlue);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
@@ -163,19 +191,6 @@
    border: 1px solid transparent;
 }
 
-.addbtn{
-    display: flex;
-    padding: 1rem;
-    justify-content: center;
-    align-items: center;
-    background-color: var(--green);
-    width: 130px;
-    height: 40px;
-    border-radius: 20px;
-}
-.addbtn:hover{
-    background-color: var(--highlightdarkGreen);
-}
 
 tr:hover{
     background-color: var(--hoverpastelYellow);

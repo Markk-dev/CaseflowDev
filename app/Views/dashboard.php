@@ -34,15 +34,11 @@ $dataTableComponent = new DataTableComponent();
                 </span> 
             </h1>
 
-            <form class="search-container" action="//llamaswill.tumblr.com/search">
-  <input id="search-box" type="text" class="search-box" name="q" />
-  <label for="search-box"><span class="glyphicon glyphicon-search search-icon"></span></label>
-  <input type="submit" id="search-submit" />
-</form>
+
 
             <div class="addbtn">
                 <a href="<?= base_url('cases/create') ?>" class="addCaseBtn">
-                <span class="material-symbols-outlined" style="font-size: 1.3rem;color: var(--darkGreen); margin: 5px;">add_circle</span>Add Case</a>
+                <span class="material-symbols-outlined" id="addCircle">add_circle</span>Create</a>
             </div>  
         </div>
         
@@ -103,6 +99,7 @@ $dataTableComponent = new DataTableComponent();
                         <th>#</th>
                         <th>Case Type</th>
                         <th>Description</th>
+                        <th>Location</th>
                         <th style="padding-left: 30px;">Priority</th>
                         <th style="padding-left: 1px;">Actions</th>
                     </tr>

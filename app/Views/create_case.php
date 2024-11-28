@@ -6,8 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create Case</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <style>
+        #locationSearch {
+            font-size: 1rem;
+        }
+
+        #locationSuggestions {
+            max-height: 200px;
+            overflow-y: auto;
+            position: absolute;
+            z-index: 1050;
+            width: 100%;
+        }
+
+        .dropdown-item {
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
 </head>
 
 <body>
@@ -30,59 +52,23 @@
                     <option value="Low">Low</option>
                 </select>
             </div>
+            
+            <div class="form-group position-relative">
+                <label for="location">Location</label>
+                <input type="text" id="locationSearch" name="location" class="form-control" placeholder="Search for a location" required>
+                <div id="locationSuggestions" class="dropdown-menu"></div>
+            </div>
+
+
             <button type="submit" class="btn btn-primary">Create Case</button>
             <a href="<?= base_url('dashboard') ?>" class="btn btn-secondary">Back to Dashboard</a>
         </form>
-
-        <div aria-live="polite" aria-atomic="true" style="position: relative;">
-            <div class="toast" id="errorToast" style="position: absolute; top: 20px; right: 20px; display: none;">
-                <div class="toast-header">
-                    <strong class="mr-auto">Error</strong>
-                    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="toast-body" id="toastBody"></div>
-            </div>
-        </div>
     </div>
 
-    <script>
-        $(document).ready(function () {
-            $('#createCaseForm').on('submit', function (e) {
-                e.preventDefault();
-
-                const caseType = $('input[name="case_type"]').val();
-                const description = $('textarea[name="description"]').val();
-                const casePriority = $('select[name="case_priority"]').val();
-
-                if (!caseType || !description || !casePriority) {
-                    $('#toastBody').html("All fields are required.");
-                    $('#errorToast').toast({ delay: 3000 }).toast('show');
-                    return;
-                }
-
-                $.ajax({
-                    url: '<?= base_url('/cases/create') ?>',
-                    type: 'POST',
-                    data: $(this).serialize(),
-                    success: function (response) {
-                        if (response.success) {
-                            alert("Case created successfully!");
-                            window.location.href = '<?= base_url('dashboard') ?>';
-                        } else {
-                            $('#toastBody').html(response.error);
-                            $('#errorToast').toast({ delay: 3000 }).toast('show');
-                        }
-                    },
-                    error: function () {
-                        $('#toastBody').html("An error occurred while creating the case.");
-                        $('#errorToast').toast({ delay: 3000 }).toast('show');
-                    }
-                });
-            });
-        });
-    </script>
+    <!-- Load external JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="<?= base_url('scripts/maps.js') ?>"></script>
 </body>
 
 </html>

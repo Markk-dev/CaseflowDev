@@ -9,12 +9,13 @@ class Dashboard extends BaseController
 {
     public function index()
 {
+
+    
     $caseModel = new CaseModel();
     
     // Fetch all cases ordered by priority
     $cases = $caseModel->orderBy('FIELD(case_priority, "High", "Medium", "Low")')->findAll();
-    
-    // Get the logged-in user's ID
+
     $userId = session()->get('user_id');
     
     $data = [
@@ -22,7 +23,8 @@ class Dashboard extends BaseController
         'totalCases' => count($cases),
         'highPriorityCases' => $caseModel->where('case_priority', 'High')->countAllResults(),
         'completedCases' => $caseModel->where('progress', 'Completed')->countAllResults(),
-        'navbar' => new navbar(),
+        'navbar' => new navbar()
+
     ];
 
     return view('dashboard', $data);
@@ -40,12 +42,18 @@ class Dashboard extends BaseController
         if (!$userId) {
             return redirect()->back()->with('error', 'User not logged in.');
         }
+        
+        $location = $this->request->getPost('location');
+        if (empty($location)) {
+            return redirect()->back()->with('error', 'Location is required.');
+        }
     
         $data = [
             'case_type'     => $this->request->getPost('case_type'),
             'description'   => $this->request->getPost('description'),
             'case_priority' => $this->request->getPost('case_priority'),
             'progress'      => $this->request->getPost('progress') ?? 0, // Default to 0 if not provided
+            'location'      => $this->request->getPost('location'), // New fi
             'user_id'       => session()->get('user_id'), // or fetch from session/login
             'created_by' => session()->get('user_id'), // Set the creator's ID
             'created_at'    => date('Y-m-d H:i:s'),

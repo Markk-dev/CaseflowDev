@@ -4,21 +4,26 @@ namespace App\Controllers;
 
 use App\Models\CaseModel;
 use App\Libraries\navbar;
+use App\Libraries\MetricChart;
 
 class StatisticsController extends BaseController
 {
     public function index()
     {
         $caseModel = new CaseModel();
-
+        $metricChart = new MetricChart();
+        
         // Fetch case counts
         $totalCasesData = $this->getCaseCounts();
         $highPriorityCasesData = $this->getHighPriorityCaseCounts();
+        $topLocations = $metricChart->getTopLocations();
 
         $data = [
             'totalCasesData' => $totalCasesData,
             'highPriorityCasesData' => $highPriorityCasesData,
             'navbar' => new Navbar(),
+            'topLocations' => $topLocations,
+            'locationChartsHTML' => $metricChart->renderLocationCharts($topLocations)
         ];
 
         return view('statistics', $data);

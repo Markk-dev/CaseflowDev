@@ -11,3 +11,5 @@ const closePanelBtn = document.getElementById('closePanelBtn');
 closePanelBtn.addEventListener('click', () => {
     sidePanel.classList.remove('active');
 });
+
+ 

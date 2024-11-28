@@ -9,7 +9,7 @@ class CaseModel extends Model
     protected $table = 'cases';
     
     protected $primaryKey = 'id';
-    protected $allowedFields = ['case_type', 'description', 'case_priority', 'progress', 'user_id', 'created_by','created_at', 'updated_at'];
+    protected $allowedFields = ['case_type', 'description', 'case_priority', 'progress', 'location', 'user_id', 'created_by','created_at', 'updated_at'];
 
     protected $useTimestamps = true;
 
