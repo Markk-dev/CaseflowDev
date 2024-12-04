@@ -30,4 +30,6 @@ $routes->post('cases/edit/(:num)', 'ConfigController::update/$1');
 $routes->get('statistics', 'StatisticsController::index');
 $routes->get('api/case-data', 'StatisticsController::getCaseData');
 
+$routes->get('complete', 'Dashboard::completedCases');
+
 

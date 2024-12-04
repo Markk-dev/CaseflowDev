@@ -11,7 +11,7 @@ class navbar
             <div class="navHeader">
                 <a href="<?= base_url('dashboard') ?>" class="<?= ($activePage === 'dashboard') ? 'active' : '' ?>">Dashboard</a>
                 <a href="<?= base_url('statistics') ?>" class="<?= ($activePage === 'statistics') ? 'active' : '' ?>">Statistics</a>
-                <a href="<?= base_url('lorem') ?>" class="<?= ($activePage === 'lorem') ? 'active' : '' ?>">Lorem</a>
+                <a href="<?= base_url('complete') ?>" class="<?= ($activePage === 'lorem') ? 'active' : '' ?>">Complete</a>
             </div>
             <button class="sidebar-toggle" id="sidebarToggle" style="color: var(--primaryDark);">☰</button>
         </div>

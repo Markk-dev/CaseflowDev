@@ -131,5 +131,12 @@ class Dashboard extends BaseController
     }
     
 
+    public function completedCases()
+    {
+        $completeCaseModel = new \App\Models\CompleteCaseModel();
+        $data['completedCases'] = $completeCaseModel->findAll();
+        echo view('completed', $data);
+    }
+
 }
 
