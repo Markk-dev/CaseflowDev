@@ -17,7 +17,9 @@ class Dashboard extends BaseController
         $activeCases = $caseModel
             ->where('progress !=', 'Complete')
             ->orderBy('FIELD(case_priority, "High", "Medium", "Low")')
-            ->findAll();
+            ->paginate(10); // Pagination for better performance with large datasets
+        
+        $pager = \Config\Services::pager(); // Pager service to manage pagination
 
         // Count total cases and high priority cases
         $totalCases = $caseModel->countAllResults();
@@ -25,10 +27,11 @@ class Dashboard extends BaseController
         $completedCases = $caseModel->where('progress', 'Complete')->countAllResults();
 
         $data = [
-            'cases' => $activeCases, 
+            'cases' => $activeCases,
             'totalCases' => $totalCases,
             'highPriorityCases' => $highPriorityCases,
             'completedCases' => $completedCases,
+            'pager' => $pager,  // Pass pager data to the view
             'navbar' => new navbar(),
         ];
 
@@ -49,6 +52,7 @@ class Dashboard extends BaseController
             return redirect()->back()->with('error', 'User not logged in.');
         }
 
+        // Validate required fields
         $location = $this->request->getPost('location');
         if (empty($location)) {
             return redirect()->back()->with('error', 'Location is required.');
@@ -59,13 +63,13 @@ class Dashboard extends BaseController
             'description'   => $this->request->getPost('description'),
             'case_priority' => $this->request->getPost('case_priority'),
             'progress'      => $this->request->getPost('progress') ?? 'Incomplete',
-            'location'      => $this->request->getPost('location'),
-            'user_id'       => session()->get('user_id'),
-            'created_by' => session()->get('user_id'),
+            'location'      => $location,
+            'user_id'       => $userId,
             'created_at'    => date('Y-m-d H:i:s'),
             'updated_at'    => date('Y-m-d H:i:s'),
         ];
 
+        // Insert case and provide feedback
         if ($caseModel->insert($data)) {
             return redirect()->to('/dashboard')->with('success', 'Case created successfully.');
         } else {
@@ -77,10 +81,12 @@ class Dashboard extends BaseController
     {
         $caseModel = new CaseModel();
 
+        // Check if the case exists before trying to delete
         if (!$caseModel->find($id)) {
             return $this->response->setJSON(['success' => false, 'error' => 'Case not found.']);
         }
 
+        // Delete the case
         $caseModel->delete($id);
         return $this->response->setJSON(['success' => true]);
     }
@@ -92,19 +98,20 @@ class Dashboard extends BaseController
         $userId = session()->get('user_id');
 
         // Check if the user is the creator of the case
-        if (!$caseModel->isCreator($id, $userId)) {
+        if (!$this->isUserAuthorized($id, $userId)) {
             return redirect()->back()->with('error', 'You do not have permission to edit this case.');
         }
 
+        // Prepare case update data
         $data = [
-            'case_type'    => $this->request->getPost('case_type'),
-            'description'  => $this->request->getPost('description'),
+            'case_type'     => $this->request->getPost('case_type'),
+            'description'   => $this->request->getPost('description'),
             'case_priority' => $this->request->getPost('case_priority'),
-            'progress'     => $this->request->getPost('progress'),
-            'updated_at'   => date('Y-m-d H:i:s'),
+            'progress'      => $this->request->getPost('progress'),
+            'updated_at'    => date('Y-m-d H:i:s'),
         ];
 
-        // Update the case data
+        // Update case data and provide feedback
         if ($caseModel->update($id, $data)) {
             return redirect()->to('/dashboard')->with('success', 'Case updated successfully.');
         } else {
@@ -117,22 +124,31 @@ class Dashboard extends BaseController
         $caseModel = new CaseModel();
         $userModel = new UserModel();
 
-        // Get the case with creator info
+        // Get the case along with creator info
         $case = $caseModel->getCaseWithCreator($id);
         if (!$case) {
             return redirect()->back()->with('error', 'Case not found.');
         }
 
         $userId = session()->get('user_id');
+        
         // Check if the user is the creator of the case
-        if (!$caseModel->isCreator($id, $userId)) {
+        if (!$this->isUserAuthorized($id, $userId)) {
             return redirect()->back()->with('error', 'You do not have permission to edit this case.');
         }
 
+        // Pass case data to the view
         $data = [
             'case' => $case,
         ];
 
         return view('edit_case', $data);
+    }
+
+    // Helper method to check if the user is the creator of the case
+    private function isUserAuthorized($caseId, $userId)
+    {
+        $caseModel = new CaseModel();
+        return $caseModel->isCreator($caseId, $userId);
     }
 }

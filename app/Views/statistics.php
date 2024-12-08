@@ -26,7 +26,6 @@ if (!isset($topLocations) || empty($topLocations)) {
 
     <div class="container mt-4">
         <h1 style="font-weight: 290;">Case <span style="font-weight: 650;">Metrics</span></h1>
-
         <p>Initial Findings Based on Metric Analysis</p>
 
 

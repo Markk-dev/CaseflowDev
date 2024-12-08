@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Libraries;
 
 class DataTableComponent {
@@ -25,8 +24,8 @@ class DataTableComponent {
         foreach ($cases as $case) {
             $priorityComponent = $this->getPriorityComponent($case['case_priority']);
     
-            // Check if the logged-in user created the case
-            $isCreator = $loggedInUserId == $case['created_by'];
+            // Check if the logged-in user created the case (now using user_id)
+            $isCreator = $loggedInUserId == $case['user_id'];  // Switch to user_id
     
             $editButton = $isCreator
                 ? '<a href="' . base_url('cases/edit/' . $case['id']) . '" class="editBtn" style="color: var(--highlightGreen); cursor: pointer;">Edit</a>'
@@ -37,7 +36,7 @@ class DataTableComponent {
                     <td>' . esc($counter++) . '</td>
                     <td>' . esc($case['case_type']) . '</td>
                     <td>' . esc($case['description']) . '</td>
-                    <td class="locationVar">' . esc($case['location']) . '</td>
+                    <td class="locationVar">' . esc(data: $case['location']) . '</td>
                     <td>' . $priorityComponent . '</td>
                     <td>
                         <div class="actionBtns">' . $editButton . '</div>
@@ -84,4 +83,4 @@ class DataTableComponent {
                 return '<p>Unknown Case Priority</p>';
         }
     }
-} 
+}
