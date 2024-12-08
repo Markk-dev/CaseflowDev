@@ -6,34 +6,34 @@ use CodeIgniter\Router\RouteCollection;
  * @var RouteCollection $routes
  */
 
-// Authentication Routes
+// Authentication 
 $routes->get('/', 'Auth::login');
 $routes->get('register', 'Auth::register');
 $routes->post('register', 'Auth::registerUser');
 $routes->get('login', 'Auth::login');
 $routes->post('login', 'Auth::loginUser');
 
-// Dashboard and case management
+// Dashboard 
 $routes->get('dashboard', 'Dashboard::index');
-$routes->get('cases/create', 'Dashboard::createCasePage'); // Form display
-$routes->post('cases/create', 'Dashboard::createCase');    // Form submission
+$routes->get('cases/create', 'Dashboard::createCasePage'); 
+$routes->post('cases/create', 'Dashboard::createCase');   
 $routes->post('cases/edit/(:num)', 'Dashboard::editCase/$1');
 $routes->post('cases/delete/(:num)', 'Dashboard::deleteCase/$1');
 
 $routes->get('user/getUserData', 'UserController::getUserData');
 
-//Edit Case Routes
+//Edit Case
 $routes->get('cases/edit/(:num)', 'ConfigController::edit/$1');
 $routes->post('cases/edit/(:num)', 'ConfigController::update/$1'); 
 
-// Statistics Routes
+// Statistics
 $routes->get('statistics', 'StatisticsController::index');
 $routes->get('api/case-data', 'StatisticsController::getCaseData');
 
 
 $routes->get('completed', 'CompletedCase::completedCases');
 
-// $routes->get('complete', 'ConfigController::completedCases');
+
 
 
 
