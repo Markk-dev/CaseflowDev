@@ -31,8 +31,9 @@ $routes->get('statistics', 'StatisticsController::index');
 $routes->get('api/case-data', 'StatisticsController::getCaseData');
 
 
-$routes->get('complete', 'Dashboard::completedCases');
-$routes->get('complete', 'ConfigController::completedCases');
+$routes->get('completed', 'CompletedCase::completedCases');
+
+// $routes->get('complete', 'ConfigController::completedCases');
 
 
 
