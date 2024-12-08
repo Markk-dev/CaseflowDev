@@ -11,13 +11,13 @@ async function initializeCharts(timeRange = '3 Days') {
 
     // Total Cases Chart
     const totalCasesChartData = {
-        labels: data.timeLabels.reverse(), // Ensure proper order: Day 1, Day 2, ...
+        labels: data.timeLabels.reverse(), 
         datasets: [
             {
                 label: 'Total Cases',
                 data: data.totalCases,
-                borderColor: 'rgba(255, 99, 132, 0.8)',
-                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(54, 162, 235, 0.8)',
+                backgroundColor: 'rgba(54, 162, 235, 0.2)',
                 borderWidth: 2,
                 tension: 0.4,
                 fill: true,
@@ -27,17 +27,19 @@ async function initializeCharts(timeRange = '3 Days') {
 
     // High Priority Cases Chart
     const highCasesChartData = {
-        labels: data.timeLabels, // Reuse labels, now ordered correctly
+        labels: data.timeLabels, 
         datasets: [
             {
                 label: 'High Priority Cases',
                 data: data.highCases,
-                borderColor: 'rgba(54, 162, 235, 0.8)',
-                backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 0.8)',
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
                 borderWidth: 2,
                 tension: 0.4,
                 fill: true,
             },
+
+          
         ]
     };
 

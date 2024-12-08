@@ -7,17 +7,14 @@ use CodeIgniter\Model;
 class CaseModel extends Model
 {
     protected $table = 'cases';
-    
     protected $primaryKey = 'id';
-    protected $allowedFields = ['case_type', 'description', 'case_priority', 'progress', 'location', 'user_id', 'created_by','created_at', 'updated_at'];
-
+    protected $allowedFields = ['case_type', 'description', 'case_priority', 'progress', 'location', 'user_id', 'created_by', 'created_at', 'updated_at'];
     protected $useTimestamps = true;
 
     protected $validationRules = [
         'case_type'    => 'required|max_length[100]',
         'description'  => 'required',
         'case_priority' => 'required|in_list[High,Medium,Low]',
-        
     ];
 
     protected $validationMessages = [
@@ -39,7 +36,7 @@ class CaseModel extends Model
         return $this->where('id', $id)->first();
     }
 
-     public function isCreator($caseId, $userId)
+    public function isCreator($caseId, $userId)
     {
         $case = $this->getCaseWithCreator($caseId);
         return $case && $case['user_id'] == $userId;  // Check if the user is the creator

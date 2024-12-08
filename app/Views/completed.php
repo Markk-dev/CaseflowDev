@@ -23,7 +23,7 @@
                     <tr>
                         <td><?= $case['case_type'] ?></td>
                         <td><?= $case['description'] ?></td>
-                        <td><?= $case['priority'] ?></td>
+                        <td><?= $case['case_priority'] ?></td>
                         <td><?= $case['completed_at'] ?></td>
                     </tr>
                 <?php endforeach; ?>

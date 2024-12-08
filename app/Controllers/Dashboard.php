@@ -8,27 +8,32 @@ use App\Libraries\navbar;
 class Dashboard extends BaseController
 {
     public function index()
-{
-
+    {
+        $caseModel = new CaseModel();
+        $userId = session()->get('user_id');
     
-    $caseModel = new CaseModel();
+        // Fetch active cases only (progress != "Complete") ordered by priority
+        $activeCases = $caseModel
+            ->where('progress !=', 'Complete')
+            ->orderBy('FIELD(case_priority, "High", "Medium", "Low")')
+            ->findAll();
     
-    // Fetch all cases ordered by priority
-    $cases = $caseModel->orderBy('FIELD(case_priority, "High", "Medium", "Low")')->findAll();
-
-    $userId = session()->get('user_id');
+        // Fetch counts for statistics
+        $totalCases = $caseModel->countAllResults();
+        $highPriorityCases = $caseModel->where('case_priority', 'High')->countAllResults();
+        $completedCases = $caseModel->where('progress', 'Complete')->countAllResults();
     
-    $data = [
-        'cases' => $cases,
-        'totalCases' => count($cases),
-        'highPriorityCases' => $caseModel->where('case_priority', 'High')->countAllResults(),
-        'completedCases' => $caseModel->where('progress', 'Completed')->countAllResults(),
-        'navbar' => new navbar()
-
-    ];
-
-    return view('dashboard', $data);
-}
+        $data = [
+            'cases' => $activeCases, // Only show active cases
+            'totalCases' => $totalCases,
+            'highPriorityCases' => $highPriorityCases,
+            'completedCases' => $completedCases,
+            'navbar' => new navbar(),
+        ];
+    
+        return view('dashboard', $data);
+    }
+    
     public function createCasePage()
     {
         return view('create_case'); 
@@ -52,7 +57,7 @@ class Dashboard extends BaseController
             'case_type'     => $this->request->getPost('case_type'),
             'description'   => $this->request->getPost('description'),
             'case_priority' => $this->request->getPost('case_priority'),
-            'progress'      => $this->request->getPost('progress') ?? 0, // Default to 0 if not provided
+            'progress'      => $this->request->getPost('progress') ?? 'Incomplete', // Default to "Incomplete"
             'location'      => $this->request->getPost('location'), // New fi
             'user_id'       => session()->get('user_id'), // or fetch from session/login
             'created_by' => session()->get('user_id'), // Set the creator's ID
@@ -133,8 +138,12 @@ class Dashboard extends BaseController
 
     public function completedCases()
     {
-        $completeCaseModel = new \App\Models\CompleteCaseModel();
-        $data['completedCases'] = $completeCaseModel->findAll();
+        $db = \Config\Database::connect();
+        $builder = $db->table('complete');
+        $builder->select('cases.case_type, cases.description, cases.case_priority, complete.completed_at');
+        $builder->join('cases', 'complete.case_id = cases.id');
+        $query = $builder->get();
+        $data['completedCases'] = $query->getResultArray();
         echo view('completed', $data);
     }
 
