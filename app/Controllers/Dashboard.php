@@ -81,15 +81,22 @@ class Dashboard extends BaseController
     {
         $caseModel = new CaseModel();
 
-        
         if (!$caseModel->find($id)) {
-            return $this->response->setJSON(['success' => false, 'error' => 'Case not found.']);
+            return redirect()->back()->with('error', 'Case not found.');
         }
 
-        
-        $caseModel->delete($id);
-        return $this->response->setJSON(['success' => true]);
+        try {
+            if ($caseModel->delete($id)) {
+                return redirect()->to('/dashboard')->with('success', 'Case deleted successfully.');
+            } else {
+                return redirect()->back()->with('error', 'Failed to delete the case.');
+            }
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Error: ' . $e->getMessage());
+        }
     }
+
+    
 
     public function editCase($id)
     {

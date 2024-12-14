@@ -22,16 +22,20 @@ $routes->post('cases/delete/(:num)', 'Dashboard::deleteCase/$1');
 
 $routes->get('user/getUserData', 'UserController::getUserData');
 
-//Edit Case
+//Edit 
 $routes->get('cases/edit/(:num)', 'ConfigController::edit/$1');
 $routes->post('cases/edit/(:num)', 'ConfigController::update/$1'); 
+
+//Delete 
+$routes->delete('cases/delete/(:num)', 'Dashboard::deleteCase/$1');
 
 // Statistics
 $routes->get('statistics', 'StatisticsController::index');
 $routes->get('api/case-data', 'StatisticsController::getCaseData');
 
-
+//Complete 
 $routes->get('completed', 'CompletedCase::completedCases');
+
 
 
 

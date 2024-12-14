@@ -21,7 +21,7 @@ if (!isset($topLocations) || empty($topLocations)) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body class="Mode">
-
+    <section class="page-transition" id="main-content">
     <?php $navbar->render('statistics'); ?>
 
     <div class="container mt-4">
@@ -62,6 +62,7 @@ if (!isset($topLocations) || empty($topLocations)) {
     <button class="close-btn" id="closePanelBtn">✖</button>
     <div id="accountSettingsSection" class="fade-section"></div>
 </div>
+</section>
 
 
 <script id="top-locations-data" type="application/json">
@@ -69,9 +70,10 @@ if (!isset($topLocations) || empty($topLocations)) {
 </script>
 
 <script src="<?= base_url('scripts/statistics.js') ?>"></script>
-
+<script src="<?= base_url('scripts/global.js') ?>"></script>
 <script src="<?= base_url('scripts/charts.js') ?>"></script>
 <script src="<?= base_url('scripts/sidepanel.js') ?>"></script>
 <script src="<?= base_url('scripts/AccountSettings.js') ?>"></script>
+
 </body>
 </html>

@@ -14,10 +14,10 @@
     <link rel="stylesheet" href="<?= base_url('styles/main.css') ?>">
 </head>
 <body>
+    <section class="page-transition" id="main-content">
     <?php  $navbar = new \App\Libraries\navbar();
         $navbar->render('complete'); 
     ?>
-
     <div class="container mt-4">
     <h1 style="font-weight: 290;">Completed <span style="font-weight: 650;">Case</span></h1>
     <p>Initial Set of Completed Case Records</p>
@@ -44,6 +44,8 @@
         </div>
 
     </div>
+    </section>
+    <script src="<?= base_url('scripts/global.js') ?>"></script>
     <script src="<?= base_url('scripts/sidepanel.js') ?>"></script> 
     <script src="<?= base_url('scripts/AccountSettings.js') ?>"></script>
 </body>

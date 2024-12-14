@@ -22,7 +22,7 @@ $dataTableComponent = new DataTableComponent();
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
 <body class="Mode">
-
+    <section class="page-transition" id="main-content">
     <?php $navbar->render('dashboard'); ?>
     
     <div class="container">
@@ -84,10 +84,10 @@ $dataTableComponent = new DataTableComponent();
 
             <div class="SearchFieldSelect">
                 <select id="filterPriority" class="form-control" placeholder="Placeholder">
-                <option value="">Place Holder</option>
-                <option value="High">Place Holder</option>
-                <option value="Medium">Place Holder</option>
-                <option value="Low">Place Holder</option>
+                <option value="">Filter</option>
+                <option value="High">High</option>
+                <option value="Medium">Medium</option>
+                <option value="Low">Low</option>
                 </select>
             </div>
         </div>
@@ -117,9 +117,11 @@ $dataTableComponent = new DataTableComponent();
       
         </div>
     </div>
+    </section>
 
     
-
+    <script src="<?= base_url('scripts/global.js') ?>"></script>
+    <script src="<?= base_url('scripts/dashboard.js') ?>"></script>
     <script src="<?= base_url('scripts/sidepanel.js') ?>"></script> 
     <script src="<?= base_url('scripts/AccountSettings.js') ?>"></script>
 </body>

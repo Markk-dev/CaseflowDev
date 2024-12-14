@@ -16,3 +16,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
   
+  document.addEventListener('DOMContentLoaded', () => {
+    const mainContent = document.getElementById('main-content');
+    mainContent.classList.add('page-transition', 'show');
+});

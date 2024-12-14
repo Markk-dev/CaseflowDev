@@ -9,10 +9,11 @@ class CaseItem
         
         ob_start();
         ?>
+         <link rel="stylesheet" href="<?= base_url('styles/global.css') ?>">
         <tr>
             <td><?= esc($counter++); ?></td>
             <td><?= esc($case['case_type']); ?></td>
-            <td><?= esc($case['description']); ?></td>
+            <td class="DescVar"><?= esc($case['description']); ?></td>
             <td class="locationVar"><?= esc($case['location']); ?></td>
             <td><?= $priorityComponent; ?></td>
         </tr>

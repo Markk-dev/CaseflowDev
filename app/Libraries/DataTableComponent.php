@@ -35,7 +35,7 @@ class DataTableComponent {
                 <tr>
                     <td>' . esc($counter++) . '</td>
                     <td>' . esc($case['case_type']) . '</td>
-                    <td>' . esc($case['description']) . '</td>
+                    <td class="DescConst">' . esc($case['description']) . '</td>
                     <td class="locationVar">' . esc(data: $case['location']) . '</td>
                     <td>' . $priorityComponent . '</td>
                     <td>

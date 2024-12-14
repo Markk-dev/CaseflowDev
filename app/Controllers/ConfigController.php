@@ -50,9 +50,9 @@ class ConfigController extends BaseController
     public function moveCompletedCases()
     {
         $caseModel = new CaseModel();
-        $completeModel = new CompleteCasesModel(); // This model works with the `complete` table.
+        $completeModel = new CompleteCasesModel();
     
-        // Fetch all cases with progress 'Complete'
+
         $completedCases = $caseModel->where('progress', 'Complete')->findAll();
     
         foreach ($completedCases as $case) {
